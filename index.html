@@ -3,155 +3,193 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Study Pin - Registration</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <title>Study Pin Launch</title>
     <style>
-        /* General Styling */
-        body {
+        * {
             margin: 0;
-            background: #000;
-            color: white;
+            padding: 0;
+            box-sizing: border-box;
             font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(to bottom, #1E3A8A, #63AFFF);
             display: flex;
-            align-items: center;
             justify-content: center;
+            align-items: center;
             height: 100vh;
-            flex-direction: column;
+            color: white;
             text-align: center;
+            flex-direction: column;
             overflow: hidden;
         }
 
-        /* Study Pin Animation */
-        .study-pin-container {
-            position: relative;
+        .celebration {
             font-size: 40px;
-            font-weight: bold;
-            text-transform: uppercase;
-            display: flex;
-            gap: 5px;
+            color: gold;
+            margin-top: 50px;
+            animation: fireworkAnimation 3s ease-out forwards;
         }
-        .study-pin-container span {
-            display: inline-block;
-            transform: translateY(100px);
-            opacity: 0;
-            animation: floatLetters 1s forwards;
-        }
-        @keyframes floatLetters {
-            0% { transform: translateY(100px); opacity: 0; }
-            100% { transform: translateY(0); opacity: 1; }
-        }
-        .study-pin-container span:nth-child(1) { animation-delay: 0.1s; }
-        .study-pin-container span:nth-child(2) { animation-delay: 0.2s; }
-        .study-pin-container span:nth-child(3) { animation-delay: 0.3s; }
-        .study-pin-container span:nth-child(4) { animation-delay: 0.4s; }
-        .study-pin-container span:nth-child(5) { animation-delay: 0.5s; }
-        .study-pin-container span:nth-child(6) { animation-delay: 0.6s; }
-        .study-pin-container span:nth-child(7) { animation-delay: 0.7s; }
-        .study-pin-container span:nth-child(8) { animation-delay: 0.8s; }
-        .study-pin-container span:nth-child(9) { animation-delay: 0.9s; }
 
-        /* Dot Loading Animation */
-        .loading-dots {
-            font-size: 30px;
+        @keyframes fireworkAnimation {
+            0% { opacity: 0; transform: scale(0); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        .loading-screen {
+            display: none;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        #counterNumber {
+            font-size: 36px;
+            margin-top: 20px;
+        }
+
+        .dots {
+            margin-top: 20px;
+            font-size: 48px;
             display: flex;
             justify-content: center;
-            gap: 5px;
-            margin-top: 20px;
         }
+
         .dot {
-            width: 10px;
-            height: 10px;
-            background: white;
-            border-radius: 50%;
-            animation: dotsAnimation 1.5s infinite ease-in-out;
-        }
-        .dot:nth-child(1) { animation-delay: 0s; }
-        .dot:nth-child(2) { animation-delay: 0.2s; }
-        .dot:nth-child(3) { animation-delay: 0.4s; }
-
-        @keyframes dotsAnimation {
-            0% { transform: translateY(0); opacity: 1; }
-            50% { transform: translateY(-10px); opacity: 0.5; }
-            100% { transform: translateY(0); opacity: 1; }
+            animation: dotAnimation 1.5s infinite steps(1);
         }
 
-        /* Enter Button (Hidden Initially) */
-        .enter-btn {
+        .dot:nth-child(1) {
+            animation-delay: 0s;
+        }
+
+        .dot:nth-child(2) {
+            animation-delay: 0.5s;
+        }
+
+        .dot:nth-child(3) {
+            animation-delay: 1s;
+        }
+
+        .dot:nth-child(4) {
+            animation-delay: 1.5s;
+        }
+
+        .dot:nth-child(5) {
+            animation-delay: 2s;
+        }
+
+        @keyframes dotAnimation {
+            0% { opacity: 0; }
+            50% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+
+        #enterBtn {
             display: none;
-            background: #00ff00;
-            color: black;
-            border: none;
-            padding: 15px 40px;
-            font-size: 20px;
-            cursor: pointer;
-            font-weight: bold;
-            border-radius: 10px;
+            padding: 10px 20px;
+            font-size: 18px;
             margin-top: 20px;
-            opacity: 0;
-            transform: scale(0.8);
-            transition: opacity 1s ease, transform 0.5s ease;
-        }
-        .enter-btn.show {
-            display: block;
-            opacity: 1;
-            transform: scale(1);
-        }
-        .enter-btn:hover {
-            background: #00cc00;
+            background: #ff5733;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
         }
 
-        /* Made by Adarsh Kumar Singh */
-        .footer {
-            position: absolute;
-            bottom: 20px;
-            font-size: 16px;
-            opacity: 0;
-            animation: fadeIn 2s forwards 5s;
+        .counter {
+            font-size: 36px;
+            margin-top: 20px;
+            font-weight: bold;
         }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+
+        .loading-header {
+            font-size: 24px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            color: #FFD700;
+        }
+
+        .loading-header i {
+            font-size: 30px;
+        }
+
+        .version {
+            font-size: 18px;
+            color: #FF6347;
+            margin-top: 20px;
+            font-weight: normal;
         }
     </style>
 </head>
 <body>
 
-    <!-- Study Pin Animated Text -->
-    <div class="study-pin-container">
-        <span>S</span><span>T</span><span>U</span><span>D</span><span>Y</span>
-        <span>P</span><span>I</span><span>N</span>
+    <!-- Celebration Animation -->
+    <div class="celebration" id="celebrationText">🎉 Study Pin Launched! 🎉</div>
+
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-header">
+            <i class="fas fa-cogs"></i>
+            <span>🎓 Study Pin Website Launched! 🎉</span>
+            <i class="fas fa-cogs"></i>
+        </div>
+        <div class="dots">
+            <div class="dot">.</div>
+            <div class="dot">.</div>
+            <div class="dot">.</div>
+        </div>
+        <div class="counter">
+            <span id="counterNumber">0</span>%
+        </div>
+        <button id="enterBtn" onclick="startLoading()">Enter</button>
     </div>
 
-    <!-- Loading Dots -->
-    <div class="loading-dots">
-        <div class="dot"></div>
-        <div class="dot"></div>
-        <div class="dot"></div>
-    </div>
+    <div class="version" id="versionText">Version 0.1</div>
 
-    <!-- Enter Button (Hidden Initially) -->
-    <button class="enter-btn" id="enterBtn" onclick="startLoading()">ENTER</button>
-
-    <!-- Footer -->
-    <div class="footer">
-        <i class="fas fa-code"></i> Made by Adarsh Kumar Singh
-    </div>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
 
     <script>
-        // Show ENTER button after 5 seconds
+        let count = 0;
+        let counterElement = document.getElementById("counterNumber");
+
+        // Set interval for percentage animation from 0 to 100
+        let interval = setInterval(() => {
+            count++;
+            counterElement.textContent = count;
+            if (count >= 100) {
+                clearInterval(interval); // Stop the counter when it reaches 100
+                setTimeout(() => {
+                    document.querySelector(".loading-screen").style.display = "none";
+                    window.location.href = "https://studypin.github.io/Official_studypin/"; // Redirect to your website after 4 seconds
+                }, 500);
+            }
+        }, 50); // Increase every 50 milliseconds
+
+        // Show celebration for 10 seconds then show enter button
         setTimeout(() => {
-            document.querySelector(".loading-dots").style.display = "none";
-            document.getElementById("enterBtn").classList.add("show");
-        }, 5000);
+            document.getElementById("celebrationText").style.display = "none";
+            document.getElementById("loadingScreen").style.display = "flex";    // Show loading screen
+            document.getElementById("enterBtn").style.display = "block";        // Show Enter button
+        }, 10000); // Show celebration for 10 seconds
 
-        // ENTER button loading animation
+        // Function to start loading when Enter button is clicked
         function startLoading() {
-            document.getElementById("enterBtn").disabled = true;
-            document.getElementById("enterBtn").innerText = "Loading...";
-
-            setTimeout(() => {
-                window.location.href = "https://studypin.github.io/Official_studypin/";
-            }, 5000);
+            let i = 0;
+            let loadingBar = document.getElementById("counterNumber");
+            let loadingInterval = setInterval(() => {
+                if (i <= 100) {
+                    loadingBar.textContent = i + '%';
+                    i++;
+                } else {
+                    clearInterval(loadingInterval);
+                    setTimeout(() => {
+                        window.location.href = "https://studypin.github.io/Official_studypin/"; // Redirect after loading
+                    }, 500); // Delay for 0.5 sec before redirecting
+                }
+            }, 50); // Increase every 50 milliseconds
         }
     </script>
 
