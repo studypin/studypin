@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study Pin - Registration</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        /* General Styling */
+        body {
+            margin: 0;
+            background: #000;
+            color: white;
+            font-family: Arial, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            flex-direction: column;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        /* Registration Form */
+        .registration-container {
+            display: block;
+            text-align: center;
+        }
+        input, button {
+            margin: 10px;
+            padding: 10px;
+            width: 250px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+        }
+        button {
+            background: #00ff00;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        button:hover {
+            background: #00cc00;
+        }
+
+        /* Loading Screen (Hidden Initially) */
+        .loading-screen {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* Dot Loading Animation */
+        .loading-dots {
+            font-size: 30px;
+            display: flex;
+            justify-content: center;
+            gap: 5px;
+            margin-top: 20px;
+        }
+        .dot {
+            width: 10px;
+            height: 10px;
+            background: white;
+            border-radius: 50%;
+            animation: dotsAnimation 1.5s infinite ease-in-out;
+        }
+        .dot:nth-child(1) { animation-delay: 0s; }
+        .dot:nth-child(2) { animation-delay: 0.2s; }
+        .dot:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes dotsAnimation {
+            0% { transform: translateY(0); opacity: 1; }
+            50% { transform: translateY(-10px); opacity: 0.5; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+
+        /* Made by Adarsh Kumar Singh */
+        .footer {
+            position: absolute;
+            bottom: 20px;
+            font-size: 16px;
+            opacity: 0;
+            animation: fadeIn 2s forwards 5s;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Registration Form -->
+    <div class="registration-container" id="registrationForm">
+        <h2>Register</h2>
+        <input type="text" id="name" placeholder="Enter Name"><br>
+        <input type="email" id="email" placeholder="Enter Email"><br>
+        <input type="password" id="password" placeholder="Create Password"><br>
+        <select id="gender">
+            <option disabled selected>Select Gender</option>
+            <option>Male</option>
+            <option>Female</option>
+            <option>Other</option>
+        </select><br>
+        <input type="number" id="age" placeholder="Enter Age"><br>
+        <button onclick="startRegistration()">Register</button>
+    </div>
+
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <h2>Processing Registration...</h2>
+        <div class="loading-dots">
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <i class="fas fa-code"></i> Made by Adarsh Kumar Singh
+    </div>
+
+    <script>
+        function startRegistration() {
+            // Hide registration form and show loading screen
+            document.getElementById("registrationForm").style.display = "none";
+            document.getElementById("loadingScreen").style.display = "flex";
+
+            // Simulate processing time (5 seconds)
+            setTimeout(() => {
+                window.location.href = "https://studypin.github.io/Official_studypin/";
+            }, 5000);
+        }
+    </script>
+
+</body>
+</html>
