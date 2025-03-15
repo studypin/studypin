@@ -21,36 +21,35 @@
             overflow: hidden;
         }
 
-        /* Registration Form */
-        .registration-container {
-            display: block;
-            text-align: center;
-        }
-        input, button {
-            margin: 10px;
-            padding: 10px;
-            width: 250px;
-            font-size: 16px;
-            border: none;
-            border-radius: 5px;
-        }
-        button {
-            background: #00ff00;
-            cursor: pointer;
+        /* Study Pin Animation */
+        .study-pin-container {
+            position: relative;
+            font-size: 40px;
             font-weight: bold;
+            text-transform: uppercase;
+            display: flex;
+            gap: 5px;
         }
-        button:hover {
-            background: #00cc00;
+        .study-pin-container span {
+            display: inline-block;
+            transform: translateY(100px);
+            opacity: 0;
+            animation: floatLetters 1s forwards;
         }
+        @keyframes floatLetters {
+            0% { transform: translateY(100px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+        .study-pin-container span:nth-child(1) { animation-delay: 0.1s; }
+        .study-pin-container span:nth-child(2) { animation-delay: 0.2s; }
+        .study-pin-container span:nth-child(3) { animation-delay: 0.3s; }
+        .study-pin-container span:nth-child(4) { animation-delay: 0.4s; }
+        .study-pin-container span:nth-child(5) { animation-delay: 0.5s; }
+        .study-pin-container span:nth-child(6) { animation-delay: 0.6s; }
+        .study-pin-container span:nth-child(7) { animation-delay: 0.7s; }
+        .study-pin-container span:nth-child(8) { animation-delay: 0.8s; }
+        .study-pin-container span:nth-child(9) { animation-delay: 0.9s; }
 
-        /* Loading Screen (Hidden Initially) */
-        .loading-screen {
-            display: none;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-        
         /* Dot Loading Animation */
         .loading-dots {
             font-size: 30px;
@@ -76,6 +75,31 @@
             100% { transform: translateY(0); opacity: 1; }
         }
 
+        /* Enter Button (Hidden Initially) */
+        .enter-btn {
+            display: none;
+            background: #00ff00;
+            color: black;
+            border: none;
+            padding: 15px 40px;
+            font-size: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            border-radius: 10px;
+            margin-top: 20px;
+            opacity: 0;
+            transform: scale(0.8);
+            transition: opacity 1s ease, transform 0.5s ease;
+        }
+        .enter-btn.show {
+            display: block;
+            opacity: 1;
+            transform: scale(1);
+        }
+        .enter-btn:hover {
+            background: #00cc00;
+        }
+
         /* Made by Adarsh Kumar Singh */
         .footer {
             position: absolute;
@@ -92,31 +116,21 @@
 </head>
 <body>
 
-    <!-- Registration Form -->
-    <div class="registration-container" id="registrationForm">
-        <h2>Register</h2>
-        <input type="text" id="name" placeholder="Enter Name"><br>
-        <input type="email" id="email" placeholder="Enter Email"><br>
-        <input type="password" id="password" placeholder="Create Password"><br>
-        <select id="gender">
-            <option disabled selected>Select Gender</option>
-            <option>Male</option>
-            <option>Female</option>
-            <option>Other</option>
-        </select><br>
-        <input type="number" id="age" placeholder="Enter Age"><br>
-        <button onclick="startRegistration()">Register</button>
+    <!-- Study Pin Animated Text -->
+    <div class="study-pin-container">
+        <span>S</span><span>T</span><span>U</span><span>D</span><span>Y</span>
+        <span>P</span><span>I</span><span>N</span>
     </div>
 
-    <!-- Loading Screen -->
-    <div class="loading-screen" id="loadingScreen">
-        <h2>Processing Registration...</h2>
-        <div class="loading-dots">
-            <div class="dot"></div>
-            <div class="dot"></div>
-            <div class="dot"></div>
-        </div>
+    <!-- Loading Dots -->
+    <div class="loading-dots">
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
     </div>
+
+    <!-- Enter Button (Hidden Initially) -->
+    <button class="enter-btn" id="enterBtn" onclick="startLoading()">ENTER</button>
 
     <!-- Footer -->
     <div class="footer">
@@ -124,12 +138,17 @@
     </div>
 
     <script>
-        function startRegistration() {
-            // Hide registration form and show loading screen
-            document.getElementById("registrationForm").style.display = "none";
-            document.getElementById("loadingScreen").style.display = "flex";
+        // Show ENTER button after 5 seconds
+        setTimeout(() => {
+            document.querySelector(".loading-dots").style.display = "none";
+            document.getElementById("enterBtn").classList.add("show");
+        }, 5000);
 
-            // Simulate processing time (5 seconds)
+        // ENTER button loading animation
+        function startLoading() {
+            document.getElementById("enterBtn").disabled = true;
+            document.getElementById("enterBtn").innerText = "Loading...";
+
             setTimeout(() => {
                 window.location.href = "https://studypin.github.io/Official_studypin/";
             }, 5000);
